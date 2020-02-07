@@ -48,7 +48,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
   }
 
   // 6.3+ get typed DataFrame directly
-  handleDataFrame(data: DataFrame[]) {
+  handleDataFrame(data: any) {
     const values: Circle[] = [];
     for (const frame of data) {
       for(let i = 0; i < frame.rows.length; i++){

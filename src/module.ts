@@ -8,6 +8,8 @@ interface Circle {
   value: number;
 }
 
+const WIDTH_HEIGHT_RATE = 310/235;
+
 export default class SimpleCtrl extends MetricsPanelCtrl {
   static templateUrl = 'partials/module.html';
 
@@ -15,6 +17,8 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     text: 'Hello World',
   };
   circleInfo: Circle[] = [];
+  mapWidth = 0;
+  mapHeight = 0;
 
   /** @ngInject */
   constructor($scope, $injector) {
@@ -48,6 +52,10 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
 
   onRenderMap(){
     console.log(this);
+    if(this.height){
+      this.mapHeight = this.height;
+      this.mapWidth = WIDTH_HEIGHT_RATE * this.height;
+    }
     this.render();
   }
 

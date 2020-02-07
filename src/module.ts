@@ -51,7 +51,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
   handleDataFrame(data: any) {
     const values: Circle[] = [];
     for (const frame of data) {
-      for(let i = 0; i < frame.rows.length; i++){
+      for (let i = 0; i < frame.rows.length; i++){
         console.log(frame.rows[i]);
       }
       this.circleInfo = values;

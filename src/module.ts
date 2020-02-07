@@ -44,7 +44,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
       this.mapHeight = this.height;
       this.mapWidth = WIDTH_HEIGHT_RATE * this.height;
     }
-    this,render();
+    this.render();
   }
 
   onDataError(err: any) {

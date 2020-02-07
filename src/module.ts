@@ -3,8 +3,10 @@ import _ from 'lodash';
 import { DataFrame } from '@grafana/data';
 
 interface Circle {
-  key: string;
-  value: any;
+  name: string;
+  lat: number;
+  lng: number;
+  value: number;
 }
 
 export default class SimpleCtrl extends MetricsPanelCtrl {
@@ -49,27 +51,18 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
   handleDataFrame(data: DataFrame[]) {
     const values: Circle[] = [];
     for (const frame of data) {
-      // const keys = frame.fields.map(ele=>ele.name);
-      console.log(frame);
-      console.log(Array.prototype.slice.call(frame["rows"]));
-      // for (let i = 0; i < frame.rows.length; i++){
-      //   let obj = {
-      //     name: '',
-      //     lat: 0,
-      //     lng: 0,
-      //     value: 0,
-      //   };
-      //   for(let j = 0; j < frame.rows[i].length; j++){
-      //     obj = {
-      //       ...obj,
-      //       [keys[j]]: frame.rows[i][j],
-      //     };
-      //   }
-      //   values.push(obj);
-      // }
+      const list = Array.prototype.slice.call(frame["rows"]);
+      list.forEach(item=>{
+        values.push({
+          name: item[0],
+          lat: item[1],
+          lng: item[2],
+          value: item[3],
+        });
+      });
+      console.log(values);
+      this.circleInfo = values;
     }
-    console.log(values);
-    this.circleInfo = values;
   }
 }
 

@@ -50,7 +50,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     console.log('onDataError', err);
   }
 
-  onRenderMap(){
+  onRenderMap() {
     console.log(this);
     if(this.height){
       this.mapHeight = this.height;

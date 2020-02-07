@@ -2,9 +2,11 @@ import { MetricsPanelCtrl } from 'grafana/app/plugins/sdk';
 import _ from 'lodash';
 import { DataFrame } from '@grafana/data';
 
-interface KeyValue {
-  key: string;
-  value: any;
+interface cicleObj {
+  name: string;
+  lat: number;
+  lng: number;
+  value: number
 }
 
 export default class SimpleCtrl extends MetricsPanelCtrl {
@@ -13,15 +15,12 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
   panelDefaults = {
     text: 'Hello World',
   };
-  firstValues: KeyValue[] = [];
-
+  circleInfo: cicleObj[] = [];
 
   /** @ngInject */
   constructor($scope, $injector) {
     super($scope, $injector);
     _.defaultsDeep(this.panel, this.panelDefaults);
-
-    (this as any).dataFormat = 'series';
 
     this.events.on('init-edit-mode', this.onInitEditMode.bind(this));
     this.events.on('panel-initialized', this.render.bind(this));
@@ -35,7 +34,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
   }
 
   onRender() {
-    if (!this.firstValues || !this.firstValues.length) {
+    if (!this.circleInfo || !this.circleInfo.length) {
       return;
     }
     // Tells the screen capture system that you finished
@@ -48,18 +47,28 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
 
   // 6.3+ get typed DataFrame directly
   handleDataFrame(data: DataFrame[]) {
-    const values: KeyValue[] = [];
+    const values: cicleObj[] = [];
     console.log(data);
     for (const frame of data) {
-      for (let i = 0; i < frame.fields.length; i++) {
-        values.push({
-          key: frame.fields[i].name,
-          value: frame.fields[i].values,
-        });
+      let keys = frame.fields.map(ele=>ele.name);
+      for (let item of frame.rows){
+        let obj: cicleObj = {
+          name: '',
+          lat: 0,
+          lng: 0,
+          value: 0
+        };
+        for(let i = 0;i < item.length;i++){
+          obj = {
+            ...obj,
+            [keys[i]]: item[i]
+          }
+        }
+        values.push(obj);
       }
     }
-
-    this.firstValues = values;
+    console.log(values);
+    this.circleInfo = values;
   }
 }
 

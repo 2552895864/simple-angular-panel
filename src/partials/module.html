@@ -2,7 +2,7 @@
     <div style="position:relative;width:{{ctrl.mapWidth}}px;height:{{ctrl.mapHeight}}px;">
         <div style="width:100%;height:100%;background-image: url('public/plugins/simple-angular-panel/img/map_v2.svg');background-size: cover;"></div>
         <div ng-repeat="circle in ctrl.circleInfo">
-            <div style="width:{{circle.size}}px;height:{{circle.size}}px;position:absolute;top:{{circle.lat/2}}%;left:{{circle.lng/2}}%;border-radius:50%;background-image:url('public/plugins/simple-angular-panel/img/circle-{{circle.type}}.png');transform:translate3d(-50%,-50%,0);"></div>
+            <div style="width:{{circle.size}}px;height:{{circle.size}}px;position:absolute;top:{{circle.lat}}%;left:{{circle.lng}}%;border-radius:50%;background-image:url('public/plugins/simple-angular-panel/img/circle-{{circle.type}}.png');transform:translate3d(-50%,-50%,0);"></div>
         </div>
         <!-- <div style="width:38px;height:38px;position:absolute;top:35%;left:50%;border-radius:50%;background-image:url('public/plugins/simple-angular-panel/img/circle-big.png');transform:translate3d(-50%,-50%,0);"></div>
         <div style="width:38px;height:38px;position:absolute;top:60%;left:35%;border-radius:50%;background-image:url('public/plugins/simple-angular-panel/img/circle-big.png');transform:translate3d(-50%,-50%,0);"></div>

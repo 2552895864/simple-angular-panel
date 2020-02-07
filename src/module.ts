@@ -70,7 +70,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
         const lat = frame.rows[i][1];
         const lng = frame.rows[i][2];
         const live = frame.rows[i][3];
-        const host = +(name.split('_')[2]);
+        const host = +name.split('_')[2];
         const value = live / host;
         const isBig = value > 0.9;
         const size = isBig ? 38 : 26;

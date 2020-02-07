@@ -1,6 +1,5 @@
 import { MetricsPanelCtrl } from 'grafana/app/plugins/sdk';
 import _ from 'lodash';
-// import { DataFrame } from '@grafana/data';
 
 interface Circle {
   name: string;
@@ -25,8 +24,8 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     (this as any).dataFormat = 'series';
 
     this.events.on('init-edit-mode', this.onInitEditMode.bind(this));
-    this.events.on('panel-initialized', this.render.bind(this));
-    this.events.on('component-did-mount', this.render.bind(this));
+    this.events.on('panel-initialized', this.onRenderMap.bind(this));
+    this.events.on('component-did-mount', this.onRenderMap.bind(this));
     this.events.on('render', this.onRender.bind(this));
     this.events.on('data-error', this.onDataError.bind(this));
   }
@@ -45,6 +44,11 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
 
   onDataError(err: any) {
     console.log('onDataError', err);
+  }
+
+  onRenderMap(){
+    console.log(this);
+    this.render();
   }
 
   // 6.3+ get typed DataFrame directly

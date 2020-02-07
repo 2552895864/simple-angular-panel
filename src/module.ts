@@ -31,7 +31,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     this.events.on('panel-initialized', this.onRenderMap.bind(this));
     this.events.on('component-did-mount', this.onRenderMap.bind(this));
     this.events.on('refresh', this.updateMap.bind(this));
-    this.events.on('render', this.onRender.bind(this));
+    this.events.on('render', this.updateMap.bind(this));
     this.events.on('data-error', this.onDataError.bind(this));
   }
 
@@ -44,15 +44,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
       this.mapHeight = this.height;
       this.mapWidth = WIDTH_HEIGHT_RATE * this.height;
     }
-    this.render();
-  }
-
-  onRender() {
-    if (!this.circleInfo || !this.circleInfo.length) {
-      return;
-    }
-    // Tells the screen capture system that you finished
-    this.renderingCompleted();
+    this,render();
   }
 
   onDataError(err: any) {

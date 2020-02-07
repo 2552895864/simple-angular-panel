@@ -39,7 +39,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     this.addEditorTab('Options', `public/plugins/${this.pluginId}/partials/options.html`, 2);
   }
 
-  updateMap(){
+  updateMap() {
     if (this.height) {
       this.mapHeight = this.height;
       this.mapWidth = WIDTH_HEIGHT_RATE * this.height;

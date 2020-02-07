@@ -6,6 +6,8 @@ interface Circle {
   lat: number;
   lng: number;
   value: number;
+  size: number;
+  type: string;
 }
 
 const WIDTH_HEIGHT_RATE = 310 / 235;
@@ -30,6 +32,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     this.events.on('init-edit-mode', this.onInitEditMode.bind(this));
     this.events.on('panel-initialized', this.onRenderMap.bind(this));
     this.events.on('component-did-mount', this.onRenderMap.bind(this));
+    this.events.on('render', this.onRender.bind(this));
     this.events.on('data-error', this.onDataError.bind(this));
   }
 
@@ -37,12 +40,20 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     this.addEditorTab('Options', `public/plugins/${this.pluginId}/partials/options.html`, 2);
   }
 
+  onRender() {
+    if (!this.circleInfo || !this.circleInfo.length) {
+      return;
+    }
+
+    // Tells the screen capture system that you finished
+    this.renderingCompleted();
+  }
+
   onDataError(err: any) {
     console.log('onDataError', err);
   }
 
   onRenderMap() {
-    console.log(this);
     if (this.height) {
       this.mapHeight = this.height;
       this.mapWidth = WIDTH_HEIGHT_RATE * this.height;
@@ -60,6 +71,8 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
           lat: frame.rows[i][1],
           lng: frame.rows[i][2],
           value: frame.rows[i][3],
+          size: frame.rows[i][3] > 100 ? 38 : 26,
+          type: frame.rows[i][3] > 100 ? 'big' : 'small',
         });
       }
     }

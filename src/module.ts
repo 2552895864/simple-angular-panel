@@ -53,8 +53,8 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     for (const frame of data) {
       const objFrame = (Object as any).assign({},frame);
       const rows = (Object as any).assign({},objFrame.rows);
-      for(let i = 0; i < 3; i++){
-        console.log(i);
+      for(const [key,value] of (Object as any).entries(rows)){
+        console.log(key,value);
       }
       this.circleInfo = values;
     }

@@ -15,6 +15,8 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     super($scope, $injector);
     _.defaultsDeep(this.panel, this.panelDefaults);
 
+    (this as any).dataFormat = 'series';
+
     this.events.on('init-edit-mode', this.onInitEditMode.bind(this));
     this.events.on('panel-initialized', this.render.bind(this));
     this.events.on('component-did-mount', this.render.bind(this));
@@ -42,24 +44,24 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
   handleDataFrame(data: DataFrame[]) {
     const values = [];
     console.log(data);
-    // for (const frame of data) {
-    //   const keys = frame.fields.map(ele=>ele.name);
-    //   for (const item of frame.rows){
-    //     let obj = {
-    //       name: '',
-    //       lat: 0,
-    //       lng: 0,
-    //       value: 0,
-    //     };
-    //     for(let i = 0; i < item.length; i++){
-    //       obj = {
-    //         ...obj,
-    //         [keys[i]]: item[i],
-    //       };
-    //     }
-    //     values.push(obj);
-    //   }
-    // }
+    for (const frame of data) {
+      const keys = frame.fields.map(ele=>ele.name);
+      for (const item of frame.rows){
+        let obj = {
+          name: '',
+          lat: 0,
+          lng: 0,
+          value: 0,
+        };
+        for(let i = 0; i < item.length; i++){
+          obj = {
+            ...obj,
+            [keys[i]]: item[i],
+          };
+        }
+        values.push(obj);
+      }
+    }
     console.log(values);
     this.circleInfo = values;
   }

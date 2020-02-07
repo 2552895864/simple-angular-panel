@@ -29,6 +29,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
 
     this.events.on('init-edit-mode', this.onInitEditMode.bind(this));
     this.events.on('panel-initialized', this.onRenderMap.bind(this));
+    this.events.on('component-did-mount', this.onRenderMap.bind(this));
     this.events.on('data-error', this.onDataError.bind(this));
   }
 

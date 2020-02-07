@@ -2,20 +2,13 @@ import { MetricsPanelCtrl } from 'grafana/app/plugins/sdk';
 import _ from 'lodash';
 import { DataFrame } from '@grafana/data';
 
-interface cicleObj {
-  name: string;
-  lat: number;
-  lng: number;
-  value: number;
-}
-
 export default class SimpleCtrl extends MetricsPanelCtrl {
   static templateUrl = 'partials/module.html';
 
   panelDefaults = {
     text: 'Hello World',
   };
-  circleInfo: cicleObj[] = [];
+  circleInfo = [];
 
   /** @ngInject */
   constructor($scope, $injector) {
@@ -47,7 +40,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
 
   // 6.3+ get typed DataFrame directly
   handleDataFrame(data: DataFrame[]) {
-    const values: cicleObj[] = [];
+    const values = [];
     console.log(data);
     for (const frame of data) {
     //   const keys = frame.fields.map(ele=>ele.name);
@@ -69,6 +62,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     // }
     // console.log(values);
     // this.circleInfo = values;
+    }
   }
 }
 

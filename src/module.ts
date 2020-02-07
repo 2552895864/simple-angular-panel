@@ -6,7 +6,7 @@ interface cicleObj {
   name: string;
   lat: number;
   lng: number;
-  value: number
+  value: number;
 }
 
 export default class SimpleCtrl extends MetricsPanelCtrl {
@@ -50,19 +50,19 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     const values: cicleObj[] = [];
     console.log(data);
     for (const frame of data) {
-      let keys = frame.fields.map(ele=>ele.name);
-      for (let item of frame.rows){
+      const keys = frame.fields.map(ele=>ele.name);
+      for (const item of frame.rows){
         let obj: cicleObj = {
           name: '',
           lat: 0,
           lng: 0,
-          value: 0
+          value: 0,
         };
-        for(let i = 0;i < item.length;i++){
+        for(let i = 0; i < item.length; i++){
           obj = {
             ...obj,
-            [keys[i]]: item[i]
-          }
+            [keys[i]]: item[i],
+          };
         }
         values.push(obj);
       }

@@ -43,10 +43,14 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
   // 6.3+ get typed DataFrame directly
   handleDataFrame(data: DataFrame[]) {
     const values = [];
-    console.log(data);
     for (const frame of data) {
-      const keys = frame.fields.map(ele=>ele.name);
-      console.log(frame);
+      // const keys = frame.fields.map(ele=>ele.name);
+      for (let i = 0; i < frame.fields.length; i++) {
+        values.push({
+          key: frame.fields[i].name,
+          value: frame.fields[i].values,
+        });
+      }
       // for (let i = 0; i < frame.rows.length; i++){
       //   let obj = {
       //     name: '',
@@ -62,7 +66,6 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
       //   }
       //   values.push(obj);
       // }
-      console.log(keys);
     }
     console.log(values);
     this.circleInfo = values;

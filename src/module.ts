@@ -66,13 +66,22 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     const values: Circle[] = [];
     for (const frame of data) {
       for (let i = 0; i < frame.rows.length; i++) {
+        let name = frame.rows[i][0];
+        let lat = frame.rows[i][1];
+        let lng = frame.rows[i][2];
+        let live = frame.rows[i][3];
+        let host = +(name.split('_')[2]);
+        let value = live / host;
+        let isBig = value > 0.9;
+        let size = isBig ? 38 : 26;
+        let type = isBig ? 'big' : 'small';
         values.push({
-          name: frame.rows[i][0],
-          lat: frame.rows[i][1],
-          lng: frame.rows[i][2],
-          value: frame.rows[i][3],
-          size: frame.rows[i][3] > 100 ? 38 : 26,
-          type: frame.rows[i][3] > 100 ? 'big' : 'small',
+          name,
+          lat,
+          lng,
+          value,
+          size,
+          type,
         });
       }
     }

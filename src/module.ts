@@ -52,17 +52,18 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     const values: Circle[] = [];
     for (const frame of data) {
       const list = Array.prototype.slice.call(frame["rows"]);
-      list.forEach(item=>{
-        values.push({
-          name: item[0],
-          lat: item[1],
-          lng: item[2],
-          value: item[3],
-        });
-      });
-      console.log(values);
-      this.circleInfo = values;
+      console.log(typeof list);
+      // list.forEach(item=>{
+      //   values.push({
+      //     name: item[0],
+      //     lat: item[1],
+      //     lng: item[2],
+      //     value: item[3],
+      //   });
+      // });
     }
+    console.log(values);
+    this.circleInfo = values;
   }
 }
 

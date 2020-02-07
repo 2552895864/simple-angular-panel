@@ -51,19 +51,9 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
   handleDataFrame(data: DataFrame[]) {
     const values: Circle[] = [];
     for (const frame of data) {
-      const list = frame["rows"];
-      console.log(typeof list,list);
-        // let item = list[i];
-        console.log(i);
-        // values.push({
-        //   name: item[0],
-        //   lat: item[1],
-        //   lng: item[2],
-        //   value: item[3],
-        // });
+      console.log(frame.toArray());
+      this.circleInfo = values;
     }
-    console.log(values);
-    this.circleInfo = values;
   }
 }
 

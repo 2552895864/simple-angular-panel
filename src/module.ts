@@ -2,13 +2,18 @@ import { MetricsPanelCtrl } from 'grafana/app/plugins/sdk';
 import _ from 'lodash';
 import { DataFrame } from '@grafana/data';
 
+interface KeyValue {
+  key: string;
+  value: any;
+}
+
 export default class SimpleCtrl extends MetricsPanelCtrl {
   static templateUrl = 'partials/module.html';
 
   panelDefaults = {
     text: 'Hello World',
   };
-  circleInfo = [];
+  circleInfo: KeyValue[] = [];
 
   /** @ngInject */
   constructor($scope, $injector) {
@@ -42,7 +47,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
 
   // 6.3+ get typed DataFrame directly
   handleDataFrame(data: DataFrame[]) {
-    const values = [];
+    const values: KeyValue[] = [];
     for (const frame of data) {
       // const keys = frame.fields.map(ele=>ele.name);
       for (let i = 0; i < frame.fields.length; i++) {

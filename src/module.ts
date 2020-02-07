@@ -59,8 +59,9 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
           value: frame.rows[i][3],
         });
       }
-      this.circleInfo = values;
     }
+    console.log(values);
+    this.circleInfo = values;
   }
 }
 

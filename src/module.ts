@@ -29,22 +29,11 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
 
     this.events.on('init-edit-mode', this.onInitEditMode.bind(this));
     this.events.on('panel-initialized', this.onRenderMap.bind(this));
-    this.events.on('component-did-mount', this.onRenderMap.bind(this));
-    this.events.on('refresh', this.updateMap.bind(this));
-    this.events.on('render', this.updateMap.bind(this));
     this.events.on('data-error', this.onDataError.bind(this));
   }
 
   onInitEditMode() {
     this.addEditorTab('Options', `public/plugins/${this.pluginId}/partials/options.html`, 2);
-  }
-
-  updateMap() {
-    if (this.height) {
-      this.mapHeight = this.height;
-      this.mapWidth = WIDTH_HEIGHT_RATE * this.height;
-    }
-    this.render();
   }
 
   onDataError(err: any) {

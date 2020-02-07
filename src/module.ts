@@ -1,6 +1,6 @@
 import { MetricsPanelCtrl } from 'grafana/app/plugins/sdk';
 import _ from 'lodash';
-import { DataFrame } from '@grafana/data';
+// import { DataFrame } from '@grafana/data';
 
 interface Circle {
   name: string;
@@ -51,7 +51,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
   handleDataFrame(data: any) {
     const values: Circle[] = [];
     for (const frame of data) {
-      for (let i = 0; i < frame.rows.length; i++){
+      for (let i = 0; i < frame.rows.length; i++) {
         console.log(frame.rows[i]);
       }
       this.circleInfo = values;

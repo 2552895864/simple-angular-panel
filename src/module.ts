@@ -43,26 +43,25 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     const values = [];
     console.log(data);
     for (const frame of data) {
-    //   const keys = frame.fields.map(ele=>ele.name);
-    //   for (const item of frame.rows){
-    //     let obj: cicleObj = {
-    //       name: '',
-    //       lat: 0,
-    //       lng: 0,
-    //       value: 0,
-    //     };
-    //     for(let i = 0; i < item.length; i++){
-    //       obj = {
-    //         ...obj,
-    //         [keys[i]]: item[i],
-    //       };
-    //     }
-    //     values.push(obj);
-    //   }
-    // }
-    // console.log(values);
-    // this.circleInfo = values;
+      const keys = frame.fields.map(ele=>ele.name);
+      for (const item of frame.rows){
+        let obj = {
+          name: '',
+          lat: 0,
+          lng: 0,
+          value: 0,
+        };
+        for(let i = 0; i < item.length; i++){
+          obj = {
+            ...obj,
+            [keys[i]]: item[i],
+          };
+        }
+        values.push(obj);
+      }
     }
+    console.log(values);
+    this.circleInfo = values;
   }
 }
 

@@ -46,7 +46,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     console.log(data);
     for (const frame of data) {
       const keys = frame.fields.map(ele=>ele.name);
-      console.log(frame.rows);
+      console.log(frame);
       // for (let i = 0; i < frame.rows.length; i++){
       //   let obj = {
       //     name: '',

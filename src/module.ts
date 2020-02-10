@@ -60,6 +60,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
       this.mapHeight = this.height;
       this.mapWidth = WIDTH_HEIGHT_RATE * this.height;
     }
+    console.log('获取');
     const points = document.querySelectorAll('.point');
     if (points && points.length) {
       console.log(points);

@@ -72,12 +72,12 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     this.render();
   }
 
-  onMountedMap(){
+  onMountedMap() {
     if (this.height) {
       this.mapHeight = this.height;
       this.mapWidth = WIDTH_HEIGHT_RATE * this.height;
     }
-    const circles = document.querySelectorAll('.point');
+    const circles = document.querySelectorAll('.circle');
     console.log(circles);
     this.render();
   }

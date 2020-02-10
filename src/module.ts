@@ -55,13 +55,13 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     if (!this.circleInfo || !this.circleInfo.length) {
       return;
     }
-    var circles = (window as any).angular.element('.circle');
-    if(circles.length == 0){
-      setTimeout(()=>{
+    let circles = (window as any).angular.element('.circle');
+    if (circles.length === 0) {
+      setTimeout(() => {
         circles = (window as any).angular.element('.circle');
         console.log(circles);
-      },0);
-    }else{
+      }, 0);
+    } else {
       console.log(circles);
     }
     // Tells the screen capture system that you finished

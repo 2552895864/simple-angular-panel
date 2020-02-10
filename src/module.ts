@@ -77,7 +77,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
       this.mapHeight = this.height;
       this.mapWidth = WIDTH_HEIGHT_RATE * this.height;
     }
-    const circles = document.querySelectorAll('.circle');
+    const circles = angular.element('.circle');
     console.log(circles);
     this.render();
   }

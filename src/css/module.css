@@ -26,7 +26,7 @@
   position: absolute;
   box-sizing: border-box;
   height: 1.5px;
-  background: -moz-linear-gradient(left, rgba(255, 137, 137, 0) 0%, rgba(250, 114, 125, 0.08) 25%,  rgba(211, 169, 104, 1) 100%); /* FF3.6-15 */
+  background: -moz-linear-gradient(left,  rgba(255, 137, 137, 0) 0%,  rgba(250, 114, 125, 0.08) 25%,  rgba(211, 169, 104, 1) 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(
     left,
     rgba(255, 137, 137, 0) 0%,

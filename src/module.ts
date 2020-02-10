@@ -1,7 +1,7 @@
 import { MetricsPanelCtrl } from 'grafana/app/plugins/sdk';
 import _ from 'lodash';
 import './css/module.css';
-import drawLine from './utils/drawLine.js';
+// import drawLine from './utils/drawLine.js';
 
 interface Circle {
   name: string;
@@ -11,6 +11,13 @@ interface Circle {
   size: number;
   type: string;
 }
+
+// interface Line {
+//   width: number;
+//   rotate: number;
+//   destX: string;
+//   destY: string;
+// }
 
 const WIDTH_HEIGHT_RATE = 310 / 235;
 const BIG_LIMIT = 0.9;
@@ -22,6 +29,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     text: 'Hello World',
   };
   circleInfo: Circle[] = [];
+  // lineInfo: Line[] = [];
   mapWidth = 0;
   mapHeight = 0;
 
@@ -34,7 +42,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
 
     this.events.on('init-edit-mode', this.onInitEditMode.bind(this));
     this.events.on('panel-initialized', this.onRenderMap.bind(this));
-    this.events.on('component-did-mount', this.onRenderMap.bind(this));
+    this.events.on('component-did-mount', this.onMountedMap.bind(this));
     this.events.on('render', this.onRender.bind(this));
     this.events.on('data-error', this.onDataError.bind(this));
   }
@@ -61,31 +69,22 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
       this.mapHeight = this.height;
       this.mapWidth = WIDTH_HEIGHT_RATE * this.height;
     }
-    setTimeout(() => {
-      const points = Array.prototype.slice.call(document.querySelectorAll('.point'));
-      const container = document.querySelector('.map-container');
-      if (points && points.length) {
-        let flag = true;
-        for (let i = 0; i < points.length; i++) {
-          const point = points[i];
-          drawLine(
-            point,
-            {
-              x: point.offsetLeft + (flag ? 300 : -300),
-              y: point.offsetTop,
-            },
-            container
-          );
-          flag = !flag;
-        }
-      }
-    }, 0);
+    this.render();
+  }
+
+  onMountedMap(){
+    if (this.height) {
+      this.mapHeight = this.height;
+      this.mapWidth = WIDTH_HEIGHT_RATE * this.height;
+    }
+    const circles = document.querySelectorAll('.point');
+    console.log(circles);
     this.render();
   }
 
   // 6.3+ get typed DataFrame directly
   handleDataFrame(data: any) {
-    const values: Circle[] = [];
+    const circles: Circle[] = [];
     for (const frame of data) {
       for (let i = 0; i < frame.rows.length; i++) {
         const name = frame.rows[i][0];
@@ -97,7 +96,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
         const isBig = value > BIG_LIMIT;
         const size = isBig ? 38 : 26;
         const type = isBig ? 'big' : 'small';
-        values.push({
+        circles.push({
           name,
           lat,
           lng,
@@ -107,7 +106,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
         });
       }
     }
-    this.circleInfo = values;
+    this.circleInfo = circles;
   }
 }
 

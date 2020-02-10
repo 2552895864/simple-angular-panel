@@ -1,17 +1,10 @@
-<!-- <div style="display: flex;align-items: center;justify-content: center;height:inherit;flex-direction: column;">
-    <div style="position:relative;width:{{ctrl.mapWidth}}px;height:{{ctrl.mapHeight}}px;">
-        <div style="width:100%;height:100%;background-image: url('public/plugins/simple-angular-panel/img/map_v2.svg');background-size: cover;"></div>
-        <div ng-repeat="circle in ctrl.circleInfo">
-            <div class="point" style="width:{{circle.size}}px;height:{{circle.size}}px;position:absolute;top:{{circle.lat}}%;left:{{circle.lng}}%;border-radius:50%;background-image:url('public/plugins/simple-angular-panel/img/circle-{{circle.type}}.png');transform:translate3d(-50%,-50%,0);"></div>
-        </div>
-    </div>
-</div> -->
-
 <div class="map-panel">
     <div class="map-container" style="width:{{ctrl.mapWidth}}px;height:{{ctrl.mapHeight}}px;">
         <div class="map-box" style="background-image: url('public/plugins/simple-angular-panel/img/map_v2.svg');"></div>
         <div ng-repeat="circle in ctrl.circleInfo">
-            <div class="point" style="width:{{circle.size}}px;height:{{circle.size}}px;top:{{circle.lat}}%;left:{{circle.lng}}%;background-image:url('public/plugins/simple-angular-panel/img/circle-{{circle.type}}.png');"></div>
+            <div class="circle" style="width:{{circle.size}}px;height:{{circle.size}}px;top:{{circle.lat}}%;left:{{circle.lng}}%;background-image:url('public/plugins/simple-angular-panel/img/circle-{{circle.type}}.png');"></div>
+            <!-- <div class="line" style="left: {{circle.lng}}%;top:{{circle.lat}}%;transform: rotate({{rotate}}rad);"></div>
+            <div class="point" style="width: 4px; height: 4px;"></div> -->
         </div>
     </div>
 </div>

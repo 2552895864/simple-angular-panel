@@ -1,5 +1,6 @@
 import { MetricsPanelCtrl } from 'grafana/app/plugins/sdk';
 import _ from 'lodash';
+import "./css/module.css"
 
 interface Circle {
   name: string;
@@ -11,6 +12,7 @@ interface Circle {
 }
 
 const WIDTH_HEIGHT_RATE = 310 / 235;
+const BIG_LIMIT = 0.9;
 
 export default class SimpleCtrl extends MetricsPanelCtrl {
   static templateUrl = 'partials/module.html';
@@ -58,6 +60,10 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
       this.mapHeight = this.height;
       this.mapWidth = WIDTH_HEIGHT_RATE * this.height;
     }
+    const points = document.querySelectorAll('.point');
+    if(points && points.length){
+      console.log(points);
+    }
     this.render();
   }
 
@@ -72,7 +78,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
         const live = frame.rows[i][3];
         const host = +name.split('_')[2];
         const value = live / host;
-        const isBig = value > 0.9;
+        const isBig = value > BIG_LIMIT;
         const size = isBig ? 38 : 26;
         const type = isBig ? 'big' : 'small';
         values.push({
@@ -85,7 +91,6 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
         });
       }
     }
-    console.log(values);
     this.circleInfo = values;
   }
 }

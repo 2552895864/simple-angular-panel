@@ -1,7 +1,7 @@
 import { MetricsPanelCtrl } from 'grafana/app/plugins/sdk';
 import _ from 'lodash';
 import './css/module.css';
-import drawLine from './utils/drawLine.js'
+import drawLine from './utils/drawLine.js';
 
 interface Circle {
   name: string;
@@ -61,20 +61,25 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
       this.mapHeight = this.height;
       this.mapWidth = WIDTH_HEIGHT_RATE * this.height;
     }
-    setTimeout(()=>{
+    setTimeout(() => {
       const points = Array.prototype.slice.call(document.querySelectorAll('.point'));
       const container = document.querySelector('.map-container');
       if (points && points.length) {
-        let flag = 0;
+        let flag = true;
         for (let i = 0; i < points.length; i++) {
           const point = points[i];
-          drawLine(point,{
-            x: point.offsetLeft + (flag ? 300 : -300),
-            y: point.offsetTop
-          },container);
+          drawLine(
+            point,
+            {
+              x: point.offsetLeft + (flag ? 300 : -300),
+              y: point.offsetTop,
+            },
+            container
+          );
+          flag = !flag;
         }
       }
-    },0);
+    }, 0);
     this.render();
   }
 

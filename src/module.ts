@@ -55,15 +55,6 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     if (!this.circleInfo || !this.circleInfo.length) {
       return;
     }
-    let circles = (window as any).angular.element('.circle');
-    if (circles.length === 0) {
-      setTimeout(() => {
-        circles = (window as any).angular.element('.circle');
-        console.log(circles);
-      }, 0);
-    } else {
-      console.log(circles);
-    }
     // Tells the screen capture system that you finished
     this.renderingCompleted();
   }
@@ -76,6 +67,15 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     if (this.height) {
       this.mapHeight = this.height;
       this.mapWidth = WIDTH_HEIGHT_RATE * this.height;
+    }
+    let circles = (window as any).angular.element('.circle');
+    if (circles.length === 0) {
+      setTimeout(() => {
+        circles = (window as any).angular.element('.circle');
+        console.log(circles);
+      }, 0);
+    } else {
+      console.log(circles);
     }
     this.render();
   }

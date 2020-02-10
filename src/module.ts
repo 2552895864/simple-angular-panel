@@ -1,6 +1,7 @@
 import { MetricsPanelCtrl } from 'grafana/app/plugins/sdk';
 import _ from 'lodash';
 import './css/module.css';
+import { PanelEvents } from '@grafana/data';
 // import drawLine from './utils/drawLine.js';
 
 interface Circle {
@@ -12,13 +13,6 @@ interface Circle {
   type: string;
 }
 
-// interface Line {
-//   width: number;
-//   rotate: number;
-//   destX: string;
-//   destY: string;
-// }
-
 const WIDTH_HEIGHT_RATE = 310 / 235;
 const BIG_LIMIT = 0.9;
 
@@ -29,7 +23,6 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     text: 'Hello World',
   };
   circleInfo: Circle[] = [];
-  // lineInfo: Line[] = [];
   mapWidth = 0;
   mapHeight = 0;
 
@@ -40,51 +33,67 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
 
     (this as any).dataFormat = 'series';
 
-    this.events.on('init-edit-mode', this.onInitEditMode.bind(this));
-    this.events.on('panel-initialized', this.onRenderMap.bind(this));
-    this.events.on('component-did-mount', this.onMountedMap.bind(this));
-    this.events.on('render', this.onRender.bind(this));
-    this.events.on('data-error', this.onDataError.bind(this));
+    this.events.on(PanelEvents.editModeInitialized, this.onInitEditMode.bind(this));
+    this.events.on(PanelEvents.panelSizeChanged, this.onPanelSizeChanged.bind(this));
+    this.events.on(PanelEvents.viewModeChanged, this.onViewModeChanged.bind(this));
+    this.events.on(PanelEvents.refresh, this.onRefresh.bind(this));
+    this.events.on(PanelEvents.panelInitialized, this.onPanelInitialized.bind(this));
+    this.events.on(PanelEvents.componentDidMount, this.onComponentDidMount.bind(this));
+    this.events.on(PanelEvents.render, this.onRender.bind(this));
+    this.events.on(PanelEvents.dataReceived, this.onDataReceived.bind(this));
+    this.events.on(PanelEvents.dataError, this.onDataError.bind(this));
   }
 
   onInitEditMode() {
     this.addEditorTab('Options', `public/plugins/${this.pluginId}/partials/options.html`, 2);
+    console.log('editModeInitialized');
+  }
+
+  onPanelSizeChanged(){
+    console.log('panelSizeChanged');
+  }
+
+  onViewModeChanged(){
+    console.log('viewModeChanged');
+  }
+
+  onRefresh(){
+    console.log('refresh');
+  }
+
+  onDataReceived(){
+    console.log('dataReceived');
   }
 
   onRender() {
     if (!this.circleInfo || !this.circleInfo.length) {
       return;
     }
+    console.log('render');
     // Tells the screen capture system that you finished
     this.renderingCompleted();
   }
 
   onDataError(err: any) {
     console.log('onDataError', err);
+    console.log('dataError');
   }
 
-  onRenderMap() {
+  onPanelInitialized() {
     if (this.height) {
       this.mapHeight = this.height;
       this.mapWidth = WIDTH_HEIGHT_RATE * this.height;
     }
-    let circles = (window as any).angular.element('.circle');
-    if (circles.length === 0) {
-      setTimeout(() => {
-        circles = (window as any).angular.element('.circle');
-        console.log(circles);
-      }, 0);
-    } else {
-      console.log(circles);
-    }
+    console.log('panelInitialized');
     this.render();
   }
 
-  onMountedMap() {
+  onComponentDidMount() {
     if (this.height) {
       this.mapHeight = this.height;
       this.mapWidth = WIDTH_HEIGHT_RATE * this.height;
     }
+    console.log('componentDidMount');
     this.render();
   }
 

@@ -1,7 +1,7 @@
 .map-panel {
   display: flex;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
   height: inherit;
   flex-direction: column;
 }
@@ -17,7 +17,7 @@
 }
 
 .point {
-  position:absolute;
-  border-radius:50%;
-  transform:translate3d(-50%,-50%,0);
+  position: absolute;
+  border-radius: 50%;
+  transform: translate3d(-50%, -50%, 0);
 }

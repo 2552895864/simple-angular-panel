@@ -9,7 +9,7 @@
 
 <div class="map-panel">
     <div class="map-container" style="width:{{ctrl.mapWidth}}px;height:{{ctrl.mapHeight}}px;">
-        <div class="map-box"></div>
+        <div class="map-box" style="background-image: url('public/plugins/simple-angular-panel/img/map_v2.svg');"></div>
         <div ng-repeat="circle in ctrl.circleInfo">
             <div class="point" style="width:{{circle.size}}px;height:{{circle.size}}px;top:{{circle.lat}}%;left:{{circle.lng}}%;background-image:url('public/plugins/simple-angular-panel/img/circle-{{circle.type}}.png');"></div>
         </div>

@@ -1,6 +1,6 @@
 import { MetricsPanelCtrl } from 'grafana/app/plugins/sdk';
 import _ from 'lodash';
-import "./css/module.css"
+import './css/module.css';
 
 interface Circle {
   name: string;
@@ -61,7 +61,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
       this.mapWidth = WIDTH_HEIGHT_RATE * this.height;
     }
     const points = document.querySelectorAll('.point');
-    if(points && points.length){
+    if (points && points.length) {
       console.log(points);
     }
     this.render();

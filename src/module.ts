@@ -14,6 +14,8 @@ interface Circle {
 
 const WIDTH_HEIGHT_RATE = 310 / 235;
 const BIG_LIMIT = 0.9;
+const MAX_WIDTH_RATE = 0.4;
+const MIN_WIDTH_RATE = 0.1;
 
 export default class SimpleCtrl extends MetricsPanelCtrl {
   static templateUrl = 'partials/module.html';
@@ -44,6 +46,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
 
   drawLine() {
     const lines = Array.prototype.slice.call(document.querySelectorAll('.line'));
+    const points = Array.prototype.slice.call(document.querySelectorAll('.point'));
     const circles = Array.prototype.slice.call(document.querySelectorAll('.circle'));
     const container = circles[0].offsetParent;
     if (lines && lines.length) {
@@ -51,12 +54,19 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
         container.removeChild(ele);
       });
     }
+    if (points && points.length) {
+      points.forEach(ele => {
+        container.removeChild(ele);
+      });
+    }
     var flag = true;
     circles.forEach(ele => {
+      const randomWidthRate = Math.random();
+      const widthRate = (randomWidthRate >= MIN_WIDTH_RATE && randomWidthRate <= MAX_WIDTH_RATE) ? randomWidthRate : 0.25;
       drawl(
         ele,
         {
-          x: ele.offsetLeft + (this.mapWidth * (flag ? 0.2 : -0.2)),
+          x: ele.offsetLeft + (this.mapWidth * (flag ? widthRate : -widthRate)),
           y: ele.offsetTop
         },
         container

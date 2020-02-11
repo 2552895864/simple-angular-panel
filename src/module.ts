@@ -45,11 +45,11 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     this.events.on("data-snapshot-load", this.onDataSnapshotLoad.bind(this));
   }
 
-  onDataSnapshotLoad(){
+  onDataSnapshotLoad() {
     console.log('data-snapshot-load');
   }
 
-  onPanelTeardown(){
+  onPanelTeardown() {
     console.log('panel-teardown');
   }
 
@@ -58,19 +58,19 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     console.log('editModeInitialized');
   }
 
-  onPanelSizeChanged(){
+  onPanelSizeChanged() {
     console.log('panelSizeChanged');
   }
 
-  onViewModeChanged(){
+  onViewModeChanged() {
     console.log('viewModeChanged');
   }
 
-  onRefresh(){
+  onRefresh() {
     console.log('refresh');
   }
 
-  onDataReceived(){
+  onDataReceived() {
     console.log('dataReceived');
   }
 

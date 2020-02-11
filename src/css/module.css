@@ -57,5 +57,4 @@
   height: 2rem;
   position: absolute;
   background-color: teal;
-  transform: translate3d(calc(-50% - 2rem), -50%, 0);
 }

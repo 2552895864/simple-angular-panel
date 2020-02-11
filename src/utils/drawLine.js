@@ -17,5 +17,5 @@ export default function drawLine(ele,circle,container){
     line.style.transform = `translate3d(0, -50%, 0) rotate(${rotate}rad)`;
     container.appendChild(line);
     makePoint(x2, y2, container);
-    makePrompt(x2, y2, container);
+    makePrompt(x2, y2, container, x2 - x1 ? false : true);
 }

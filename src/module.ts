@@ -59,15 +59,15 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
         container.removeChild(ele);
       });
     }
-    var flag = true;
+    let flag = true;
     circles.forEach(ele => {
       const randomWidthRate = Math.random();
       const widthRate = (randomWidthRate >= MIN_WIDTH_RATE && randomWidthRate <= MAX_WIDTH_RATE) ? randomWidthRate : 0.25;
       drawl(
         ele,
         {
-          x: ele.offsetLeft + (this.mapWidth * (flag ? widthRate : -widthRate)),
-          y: ele.offsetTop
+          x: ele.offsetLeft + this.mapWidth * (flag ? widthRate : -widthRate),
+          y: ele.offsetTop,
         },
         container
       );

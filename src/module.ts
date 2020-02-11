@@ -109,7 +109,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
 
   onPanelSizeChanged() {
     this.updateMapWidth();
-    this.drawLine();
+    this.$timeout(this.drawLine.bind(this), 0);
   }
 
   onRefresh() {

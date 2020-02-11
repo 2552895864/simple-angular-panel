@@ -1,7 +1,6 @@
 import { MetricsPanelCtrl } from 'grafana/app/plugins/sdk';
 import _ from 'lodash';
 import './css/module.css';
-import { PanelEvents } from '@grafana/data';
 // import drawLine from './utils/drawLine.js';
 
 interface Circle {
@@ -33,15 +32,25 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
 
     (this as any).dataFormat = 'series';
 
-    this.events.on(PanelEvents.editModeInitialized, this.onInitEditMode.bind(this));
-    this.events.on(PanelEvents.panelSizeChanged, this.onPanelSizeChanged.bind(this));
-    this.events.on(PanelEvents.viewModeChanged, this.onViewModeChanged.bind(this));
-    this.events.on(PanelEvents.refresh, this.onRefresh.bind(this));
-    this.events.on(PanelEvents.panelInitialized, this.onPanelInitialized.bind(this));
-    this.events.on(PanelEvents.componentDidMount, this.onComponentDidMount.bind(this));
-    this.events.on(PanelEvents.render, this.onRender.bind(this));
-    this.events.on(PanelEvents.dataReceived, this.onDataReceived.bind(this));
-    this.events.on(PanelEvents.dataError, this.onDataError.bind(this));
+    this.events.on('init-edit-mode', this.onInitEditMode.bind(this));
+    this.events.on('panel-size-changed', this.onPanelSizeChanged.bind(this));
+    this.events.on('panel-teardown', this.onPanelTeardown.bind(this));
+    this.events.on('view-mode-changed', this.onViewModeChanged.bind(this));
+    this.events.on('refresh', this.onRefresh.bind(this));
+    this.events.on('panel-initialized', this.onPanelInitialized.bind(this));
+    this.events.on('component-did-mount', this.onComponentDidMount.bind(this));
+    this.events.on('render', this.onRender.bind(this));
+    this.events.on('data-received', this.onDataReceived.bind(this));
+    this.events.on('data-error', this.onDataError.bind(this));
+    this.events.on("data-snapshot-load", this.onDataSnapshotLoad.bind(this));
+  }
+
+  onDataSnapshotLoad(){
+    console.log('data-snapshot-load');
+  }
+
+  onPanelTeardown(){
+    console.log('panel-teardown');
   }
 
   onInitEditMode() {

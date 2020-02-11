@@ -24,6 +24,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
   circleInfo: Circle[] = [];
   mapWidth = 0;
   mapHeight = 0;
+  isInitial = true;
 
   /** @ngInject */
   constructor($scope, $injector) {
@@ -41,25 +42,40 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     this.events.on('data-error', this.onDataError.bind(this));
   }
 
-  onInitEditMode() {
-    this.addEditorTab('Options', `public/plugins/${this.pluginId}/partials/options.html`, 2);
-    console.log('editModeInitialized');
+  drawLine(){
+    const lines = document.querySelectorAll('.line');
+    const circles = document.querySelectorAll('.circle');
+    console.log(lines);
+    console.log(circles);
+    if(lines && lines.length){
+      ;
+    }else{
+      ;
+    }
   }
 
-  onPanelSizeChanged() {
+  updateMapWidth() {
     if (this.height) {
       this.mapHeight = this.height;
       this.mapWidth = WIDTH_HEIGHT_RATE * this.height;
     }
-    console.log('panelSizeChanged');
+  }
+
+  onInitEditMode() {
+    this.addEditorTab('Options', `public/plugins/${this.pluginId}/partials/options.html`, 2);
+  }
+
+  onPanelSizeChanged() {
+    this.updateMapWidth();
   }
 
   onRefresh() {
-    setTimeout(() => {
-      const points = document.querySelectorAll('.circle');
-      console.log(points);
-    }, 1000);
-    console.log('refresh');
+    if(this.isInitial){
+      this.$timeout(this.drawLine.bind(this), 1000);
+    }else{
+      this.drawLine();
+    }
+    this.isInitial = false;
   }
 
   onRender() {
@@ -73,24 +89,14 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
 
   onDataError(err: any) {
     console.log('onDataError', err);
-    console.log('dataError');
   }
 
   onPanelInitialized() {
-    if (this.height) {
-      this.mapHeight = this.height;
-      this.mapWidth = WIDTH_HEIGHT_RATE * this.height;
-    }
-    const points = document.querySelectorAll('.circle');
-    console.log(points);
-    console.log('panelInitialized');
+    this.updateMapWidth();
     this.render();
   }
 
   onComponentDidMount() {
-    const points = document.querySelectorAll('.circle');
-    console.log(points);
-    console.log('componentDidMount');
     this.render();
   }
 

@@ -14,8 +14,9 @@ interface Circle {
 
 const WIDTH_HEIGHT_RATE = 310 / 235;
 const BIG_LIMIT = 0.9;
-const MAX_WIDTH_RATE = 0.4;
-const MIN_WIDTH_RATE = 0.1;
+const MAX_WIDTH_RATE = 0.25;
+const MIDDLE_WIDTH_RATE = 0.15;
+const MIN_WIDTH_RATE = 0.05;
 
 export default class SimpleCtrl extends MetricsPanelCtrl {
   static templateUrl = 'partials/module.html';
@@ -62,7 +63,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     let flag = true;
     circles.forEach(ele => {
       const randomWidthRate = Math.random();
-      const widthRate = (randomWidthRate >= MIN_WIDTH_RATE && randomWidthRate <= MAX_WIDTH_RATE) ? randomWidthRate : 0.25;
+      const widthRate = (randomWidthRate >= MIN_WIDTH_RATE && randomWidthRate <= MAX_WIDTH_RATE) ? randomWidthRate : MIDDLE_WIDTH_RATE;
       drawl(
         ele,
         {

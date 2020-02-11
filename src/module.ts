@@ -29,6 +29,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
   circleInfo: Circle[] = [];
   mapWidth = 0;
   mapHeight = 0;
+  mapFont = 16;
   isInitial = true;
 
   /** @ngInject */
@@ -98,6 +99,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     if (this.height) {
       this.mapHeight = this.height;
       this.mapWidth = WIDTH_HEIGHT_RATE * this.height;
+      this.mapFont = 0.02 * this.height;
     }
   }
 

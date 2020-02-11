@@ -3,7 +3,7 @@ export default function makePrompt(x, y, name, live, host, container, isLeft){
     var nameBox = document.createElement('div');
     var countBox = document.createElement('div');
     var length = String(name + live + host).length;
-    var reduceFac = Math.round((length - 7) / 7);
+    var reduceFac = Math.round((length - 14) / 7);
     length = length * (1 - 0.1 * reduceFac);
     textBox.classList.add('text-box');
     nameBox.classList.add('name-box');

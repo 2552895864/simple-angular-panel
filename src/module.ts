@@ -42,12 +42,12 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     this.events.on('data-error', this.onDataError.bind(this));
   }
 
-  drawLine(){
+  drawLine() {
     const lines = Array.prototype.slice.call(document.querySelectorAll('.line'));
     const circles = Array.prototype.slice.call(document.querySelectorAll('.circle'));
     const container = circles[0].offsetParent;
     console.log(container);
-    if(lines && lines.length){
+    if (lines && lines.length) {
       lines.forEach(ele => {
         container.removeChild(ele);
       });
@@ -77,9 +77,9 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
   }
 
   onRefresh() {
-    if(this.isInitial){
+    if (this.isInitial) {
       this.$timeout(this.drawLine.bind(this), 1000);
-    }else{
+    } else {
       this.drawLine();
     }
     this.isInitial = false;

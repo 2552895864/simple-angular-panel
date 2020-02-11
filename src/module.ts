@@ -33,7 +33,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     (this as any).dataFormat = 'series';
 
     this.events.on('component-did-mount', this.onComponentDidMount.bind(this)); //dom生成前触发
-    this.events.on('init-edit-mode', this.onInitEditMode.bind(this));  //component-did-mount后触发
+    this.events.on('init-edit-mode', this.onInitEditMode.bind(this)); //component-did-mount后触发
     this.events.on('panel-size-changed', this.onPanelSizeChanged.bind(this)); //大小改变触发
     this.events.on('refresh', this.onRefresh.bind(this)); //数据刷新触发，加载会触发一次
     this.events.on('panel-initialized', this.onPanelInitialized.bind(this));
@@ -58,7 +58,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     setTimeout(() => {
       const points = document.querySelectorAll('.circle');
       console.log(points);
-    },0);
+    }, 1000);
     console.log('refresh');
   }
 

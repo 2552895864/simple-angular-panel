@@ -16,7 +16,7 @@ const WIDTH_HEIGHT_RATE = 310 / 235;
 const BIG_LIMIT = 0.9;
 const MAX_WIDTH_RATE = 0.25;
 const MIDDLE_WIDTH_RATE = 0.15;
-const MIN_WIDTH_RATE = 0.05;
+const MIN_WIDTH_RATE = 0.1;
 
 export default class SimpleCtrl extends MetricsPanelCtrl {
   static templateUrl = 'partials/module.html';

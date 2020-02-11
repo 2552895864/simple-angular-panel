@@ -1,5 +1,6 @@
 import getAngle from './getAngle.js';
 import makePoint from './makePoint.js';
+import makePrompt from './makePrompt.js';
 
 export default function drawLine(ele,circle,container){
     var x1 = ele.offsetLeft;
@@ -16,4 +17,5 @@ export default function drawLine(ele,circle,container){
     line.style.transform = `translate3d(0, -50%, 0) rotate(${rotate}rad)`;
     container.appendChild(line);
     makePoint(x2, y2, container);
+    makePrompt(x2, y2, container);
 }

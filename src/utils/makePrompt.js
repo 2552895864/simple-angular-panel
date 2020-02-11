@@ -9,7 +9,7 @@ export default function makePrompt(x, y, name, live, host, container, isLeft){
     textBox.style.width = `${length}rem`;
     textBox.style.left = `${x}px`;
     textBox.style.top = `${y}px`;
-    textBox.style.transform = `translate3d(${isLeft? -100 : 0}%), -50%, 0)`;
+    textBox.style.transform = `translate3d(${isLeft? -100 : 0}%, -50%, 0)`;
     nameBox.innerText = name;
     countBox.innerText = `${live} / ${host}`;
     textBox.appendChild(nameBox);

@@ -47,9 +47,9 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     this.events.on('data-error', this.onDataError.bind(this));
   }
 
-  clearAll(){
+  clearAll() {
     const circles = Array.prototype.slice.call(document.querySelectorAll('.circle'));
-    if(circles && circles.length){
+    if (circles && circles.length) {
       const points = Array.prototype.slice.call(document.querySelectorAll('.point'));
       const textBoxs = Array.prototype.slice.call(document.querySelectorAll('.text-box'));
       const lines = Array.prototype.slice.call(document.querySelectorAll('.line'));
@@ -154,7 +154,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
         const isBig = value > BIG_LIMIT;
         const size = isBig ? 38 : 26;
         const type = isBig ? 'big' : 'small';
-        name = name.split('_')[0];
+        name = name.split('_')[0].split('|')[1];
         circles.push({
           name,
           lat,

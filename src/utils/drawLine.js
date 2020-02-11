@@ -18,6 +18,8 @@ export default function drawLine(ele,circle,container){
     line.style.top = `${y1}px`;
     line.style.width = `${width}px`;
     line.style.transform = `rotate(${rotate}rad)`;
+    console.log(line);
+    console.log(point);
     container.appendChild(line);
     container.appendChild(point);
 }

@@ -1,7 +1,7 @@
 import { MetricsPanelCtrl } from 'grafana/app/plugins/sdk';
 import _ from 'lodash';
 import './css/module.css';
-// import drawLine from './utils/drawLine.js';
+import drawl from './utils/drawLine.js';
 
 interface Circle {
   name: string;
@@ -43,15 +43,22 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
   }
 
   drawLine(){
-    const lines = document.querySelectorAll('.line');
-    const circles = document.querySelectorAll('.circle');
-    console.log(lines);
-    console.log(circles);
+    const lines = Array.prototype.slice.call(document.querySelectorAll('.line'));
+    const circles = Array.prototype.slice.call(document.querySelectorAll('.circle'));
+    const container = circles[0].offsetParent;
+    console.log(container);
     if(lines && lines.length){
-      ;
-    }else{
-      ;
+      lines.forEach(ele => {
+        container.removeChild(ele);
+      });
     }
+    circles.forEach(ele => {
+      console.log(ele);
+      drawl(ele,{
+        x: ele.offsetLeft - this.mapWidth * 0.2,
+        y: ele.offsetTop
+      }, container);
+    });
   }
 
   updateMapWidth() {

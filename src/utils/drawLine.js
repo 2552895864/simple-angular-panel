@@ -10,6 +10,9 @@ export default function drawLine(ele,circle,container){
     var width = Math.sqrt(Math.pow(Math.abs(x2-x1),2)+Math.pow(Math.abs(y2-y1),2));
     var rotate = -getAngle(x1,-y1,x2,-y2);
     var line = document.createElement('div');
+    var name = ele.getAttribute('node');
+    var live = ele.getAttribute('live');
+    var host = ele.getAttribute('host');
     line.classList.add('line');
     line.style.left = `${x1}px`;
     line.style.top = `${y1}px`;
@@ -17,5 +20,5 @@ export default function drawLine(ele,circle,container){
     line.style.transform = `translate3d(0, -50%, 0) rotate(${rotate}rad)`;
     container.appendChild(line);
     makePoint(x2, y2, container);
-    makePrompt(x2, y2, container, (x2 - x1) > 0 ? false : true);
+    makePrompt(x2, y2, name, live, host, container, (x2 - x1) > 0 ? false : true);
 }

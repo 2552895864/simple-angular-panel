@@ -53,8 +53,22 @@
 }
 
 .text-box {
+  display: flex;
   width: 6rem;
-  height: 2rem;
+  height: 3rem;
   position: absolute;
-  background-color: teal;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: beige;
+}
+
+.name-box {
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.count-box {
+  font-size: 1em;
+  text-align: center;
 }

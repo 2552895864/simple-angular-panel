@@ -10,6 +10,8 @@ interface Circle {
   value: number;
   size: number;
   type: string;
+  live: number;
+  host: number;
 }
 
 const WIDTH_HEIGHT_RATE = 310 / 235;
@@ -127,15 +129,16 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     const circles: Circle[] = [];
     for (const frame of data) {
       for (let i = 0; i < frame.rows.length; i++) {
-        const name = frame.rows[i][0];
+        let name = frame.rows[i][0];
         const lat = frame.rows[i][1];
         const lng = frame.rows[i][2];
-        const live = frame.rows[i][3];
+        const live = +frame.rows[i][3];
         const host = +name.split('_')[2];
         const value = live / host;
         const isBig = value > BIG_LIMIT;
         const size = isBig ? 38 : 26;
         const type = isBig ? 'big' : 'small';
+        name = name.split('_')[0];
         circles.push({
           name,
           lat,
@@ -143,6 +146,8 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
           value,
           size,
           type,
+          live,
+          host,
         });
       }
     }

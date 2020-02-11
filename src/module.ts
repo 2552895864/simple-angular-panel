@@ -62,8 +62,8 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     }
     let flag = true;
     circles.forEach(ele => {
-      const randomWidthRate = Math.random();
-      const widthRate = randomWidthRate >= MIN_WIDTH_RATE && randomWidthRate <= MAX_WIDTH_RATE ? randomWidthRate : MIDDLE_WIDTH_RATE;
+      const randomWidthRate = Math.random() * MAX_WIDTH_RATE;
+      const widthRate = randomWidthRate >= MIN_WIDTH_RATE ? randomWidthRate : MIDDLE_WIDTH_RATE;
       drawl(
         ele,
         {

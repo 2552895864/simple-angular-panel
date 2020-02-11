@@ -47,35 +47,51 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     this.events.on('data-error', this.onDataError.bind(this));
   }
 
-  drawLine() {
-    const lines = Array.prototype.slice.call(document.querySelectorAll('.line'));
-    const points = Array.prototype.slice.call(document.querySelectorAll('.point'));
+  clearAll(){
     const circles = Array.prototype.slice.call(document.querySelectorAll('.circle'));
-    const container = circles[0].offsetParent;
-    if (lines && lines.length) {
-      lines.forEach(ele => {
-        container.removeChild(ele);
+    if(circles && circles.length){
+      const points = Array.prototype.slice.call(document.querySelectorAll('.point'));
+      const textBoxs = Array.prototype.slice.call(document.querySelectorAll('.text-box'));
+      const lines = Array.prototype.slice.call(document.querySelectorAll('.line'));
+      const container = circles[0].offsetParent;
+      if (lines && lines.length) {
+        lines.forEach(ele => {
+          container.removeChild(ele);
+        });
+      }
+      if (points && points.length) {
+        points.forEach(ele => {
+          container.removeChild(ele);
+        });
+      }
+      if (textBoxs && textBoxs.length) {
+        textBoxs.forEach(ele => {
+          container.removeChild(ele);
+        });
+      }
+    }
+  }
+
+  drawLine() {
+    this.clearAll();
+    const circles = Array.prototype.slice.call(document.querySelectorAll('.circle'));
+    if (circles && circles.length) {
+      const container = circles[0].offsetParent;
+      let flag = true;
+      circles.forEach(ele => {
+        const randomWidthRate = Math.random() * MAX_WIDTH_RATE;
+        const widthRate = randomWidthRate >= MIN_WIDTH_RATE ? randomWidthRate : MIDDLE_WIDTH_RATE;
+        drawl(
+          ele,
+          {
+            x: ele.offsetLeft + this.mapWidth * (flag ? widthRate : -widthRate),
+            y: ele.offsetTop,
+          },
+          container
+        );
+        flag = !flag;
       });
     }
-    if (points && points.length) {
-      points.forEach(ele => {
-        container.removeChild(ele);
-      });
-    }
-    let flag = true;
-    circles.forEach(ele => {
-      const randomWidthRate = Math.random() * MAX_WIDTH_RATE;
-      const widthRate = randomWidthRate >= MIN_WIDTH_RATE ? randomWidthRate : MIDDLE_WIDTH_RATE;
-      drawl(
-        ele,
-        {
-          x: ele.offsetLeft + this.mapWidth * (flag ? widthRate : -widthRate),
-          y: ele.offsetTop,
-        },
-        container
-      );
-      flag = !flag;
-    });
   }
 
   updateMapWidth() {

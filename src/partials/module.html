@@ -3,8 +3,6 @@
         <div class="map-box" style="background-image: url('public/plugins/simple-angular-panel/img/map_v2.svg');"></div>
         <div ng-repeat="circle in ctrl.circleInfo">
             <div class="circle" node="{{circle.name}}" live="{{circle.live}}" host="{{circle.host}}" style="width:{{circle.size}}px;height:{{circle.size}}px;top:{{circle.lat}}%;left:{{circle.lng}}%;background-image:url('public/plugins/simple-angular-panel/img/circle-{{circle.type}}.png');"></div>
-            <!-- <div class="line" style="left: {{circle.lng}}%;top:{{circle.lat}}%;transform: rotate({{rotate}}rad);"></div>
-            <div class="point" style="width: 4px; height: 4px;"></div> -->
         </div>
     </div>
 </div>

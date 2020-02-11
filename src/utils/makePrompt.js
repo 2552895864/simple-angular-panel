@@ -1,7 +1,7 @@
 export default function makePrompt(x, y, container){
     var textBox = document.createElement('div');
-    point.classList.add('text-box');
-    point.style.left = `${x}px`;
-    point.style.top = `${y}px`;
+    textBox.classList.add('text-box');
+    textBox.style.left = `${x}px`;
+    textBox.style.top = `${y}px`;
     container.appendChild(textBox);
 }

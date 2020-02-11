@@ -55,8 +55,10 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
   }
 
   onRefresh() {
-    const points = document.querySelectorAll('.circle');
-    console.log(points);
+    setTimeout(() => {
+      const points = document.querySelectorAll('.circle');
+      console.log(points);
+    },0);
     console.log('refresh');
   }
 

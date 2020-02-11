@@ -31,6 +31,7 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
   mapHeight = 0;
   mapFont = 16;
   isInitial = true;
+  sizeTimer = null;
 
   /** @ngInject */
   constructor($scope, $injector) {
@@ -109,7 +110,10 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
 
   onPanelSizeChanged() {
     this.updateMapWidth();
-    this.$timeout(this.drawLine.bind(this), 0);
+    if(this.sizeTimer){
+      this.$timeout.cancle(this.sizeTimer);
+    }
+    this.sizeTimer = this.$timeout(this.drawLine.bind(this), 1000);
   }
 
   onRefresh() {

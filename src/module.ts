@@ -16,7 +16,7 @@ interface Circle {
 
 const WIDTH_HEIGHT_RATE = 310 / 235;
 const BIG_LIMIT = 0.9;
-const MAX_WIDTH_RATE = 0.25;
+const MAX_WIDTH_RATE = 0.2;
 const MIDDLE_WIDTH_RATE = 0.15;
 const MIN_WIDTH_RATE = 0.1;
 

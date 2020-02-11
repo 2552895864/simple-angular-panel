@@ -46,18 +46,22 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
     const lines = Array.prototype.slice.call(document.querySelectorAll('.line'));
     const circles = Array.prototype.slice.call(document.querySelectorAll('.circle'));
     const container = circles[0].offsetParent;
-    console.log(container);
     if (lines && lines.length) {
       lines.forEach(ele => {
         container.removeChild(ele);
       });
     }
+    var flag = true;
     circles.forEach(ele => {
-      console.log(ele);
-      drawl(ele,{
-        x: ele.offsetLeft - this.mapWidth * 0.2,
-        y: ele.offsetTop
-      }, container);
+      drawl(
+        ele,
+        {
+          x: ele.offsetLeft + (this.mapWidth * (flag ? 0.2 : -0.2)),
+          y: ele.offsetTop
+        },
+        container
+      );
+      flag = !flag;
     });
   }
 

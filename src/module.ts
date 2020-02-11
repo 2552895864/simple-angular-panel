@@ -32,25 +32,13 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
 
     (this as any).dataFormat = 'series';
 
-    this.events.on('init-edit-mode', this.onInitEditMode.bind(this));
-    this.events.on('panel-size-changed', this.onPanelSizeChanged.bind(this));
-    this.events.on('panel-teardown', this.onPanelTeardown.bind(this));
-    this.events.on('view-mode-changed', this.onViewModeChanged.bind(this));
-    this.events.on('refresh', this.onRefresh.bind(this));
+    this.events.on('component-did-mount', this.onComponentDidMount.bind(this)); //dom生成前触发
+    this.events.on('init-edit-mode', this.onInitEditMode.bind(this));  //component-did-mount后触发
+    this.events.on('panel-size-changed', this.onPanelSizeChanged.bind(this)); //大小改变触发
+    this.events.on('refresh', this.onRefresh.bind(this)); //数据刷新触发，加载会触发一次
     this.events.on('panel-initialized', this.onPanelInitialized.bind(this));
-    this.events.on('component-did-mount', this.onComponentDidMount.bind(this));
-    this.events.on('render', this.onRender.bind(this));
-    this.events.on('data-received', this.onDataReceived.bind(this));
+    this.events.on('render', this.onRender.bind(this)); //加载、大小改变后触发
     this.events.on('data-error', this.onDataError.bind(this));
-    this.events.on("data-snapshot-load", this.onDataSnapshotLoad.bind(this));
-  }
-
-  onDataSnapshotLoad() {
-    console.log('data-snapshot-load');
-  }
-
-  onPanelTeardown() {
-    console.log('panel-teardown');
   }
 
   onInitEditMode() {
@@ -59,19 +47,17 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
   }
 
   onPanelSizeChanged() {
+    if (this.height) {
+      this.mapHeight = this.height;
+      this.mapWidth = WIDTH_HEIGHT_RATE * this.height;
+    }
     console.log('panelSizeChanged');
   }
 
-  onViewModeChanged() {
-    console.log('viewModeChanged');
-  }
-
   onRefresh() {
+    const points = document.querySelectorAll('.circle');
+    console.log(points);
     console.log('refresh');
-  }
-
-  onDataReceived() {
-    console.log('dataReceived');
   }
 
   onRender() {
@@ -93,15 +79,15 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
       this.mapHeight = this.height;
       this.mapWidth = WIDTH_HEIGHT_RATE * this.height;
     }
+    const points = document.querySelectorAll('.circle');
+    console.log(points);
     console.log('panelInitialized');
     this.render();
   }
 
   onComponentDidMount() {
-    if (this.height) {
-      this.mapHeight = this.height;
-      this.mapWidth = WIDTH_HEIGHT_RATE * this.height;
-    }
+    const points = document.querySelectorAll('.circle');
+    console.log(points);
     console.log('componentDidMount');
     this.render();
   }

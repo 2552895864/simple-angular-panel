@@ -1,6 +1,12 @@
 import { MetricsPanelCtrl } from 'grafana/app/plugins/sdk';
 import _ from 'lodash';
-// import './css/module.css';
+import 'ol/ol.css';
+import Map from 'ol/Map';
+import View from 'ol/View';
+import TileLayer from 'ol/layer/Tile';
+import BingMaps from 'ol/source/BingMaps';
+
+import './css/module.css';
 // import drawl from './utils/drawLine.js';
 
 // interface Circle {
@@ -19,6 +25,16 @@ import _ from 'lodash';
 // const MAX_WIDTH_RATE = 0.2;
 // const MIDDLE_WIDTH_RATE = 0.15;
 // const MIN_WIDTH_RATE = 0.1;
+
+var styles = [
+  'RoadOnDemand',
+  'Aerial',
+  'AerialWithLabelsOnDemand',
+  'CanvasDark',
+  'OrdnanceSurvey'
+];
+var layers = [];
+var i, ii;
 
 export default class SimpleCtrl extends MetricsPanelCtrl {
   static templateUrl = 'partials/module.html';
@@ -74,6 +90,36 @@ export default class SimpleCtrl extends MetricsPanelCtrl {
   }
 
   onComponentDidMount() {
+    for (i = 0, ii = styles.length; i < ii; ++i) {
+      layers.push(new TileLayer({
+        visible: false,
+        preload: Infinity,
+        source: new BingMaps({
+          key: 'AvPaYAAlnSTmzPAc5e3NCWKresElFW0KoAhV6i-BCs8Hg0o3YnV9R6YDrf6nG9wl',
+          imagerySet: styles[i]
+          // use maxZoom 19 to see stretched tiles instead of the BingMaps
+          // "no photos at this zoom level" tiles
+          // maxZoom: 19
+        })
+      }));
+      var map = new Map({
+        layers: layers,
+        target: 'map',
+        view: new View({
+          center: [-6655.5402445057125, 6709968.258934638],
+          zoom: 13
+        })
+      });
+      var select = document.getElementById('layer-select');
+      function onChange() {
+        var style = select.value;
+        for (var i = 0, ii = layers.length; i < ii; ++i) {
+          layers[i].setVisible(styles[i] === style);
+        }
+      }
+      select.addEventListener('change', onChange);
+      onChange();      
+    }
     this.render();
   }
 

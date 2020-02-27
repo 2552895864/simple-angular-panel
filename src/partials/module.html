@@ -1,3 +1,11 @@
 <div class="map-panel">
-    test
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=fetch,requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <div id="map" class="map"></div>
+     <select id="layer-select">
+       <option value="Aerial">Aerial</option>
+       <option value="AerialWithLabelsOnDemand" selected>Aerial with labels</option>
+       <option value="RoadOnDemand">Road</option>
+       <option value="CanvasDark">Road dark</option>
+       <option value="OrdnanceSurvey">Ordnance Survey</option>
+     </select>
 </div>

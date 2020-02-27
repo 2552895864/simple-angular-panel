@@ -10,6 +10,9 @@
   },
   "author": "Grafana Labs",
   "license": "Apache-2.0",
+  "dependencies": {
+    "ol": "6.2.1"
+  },
   "devDependencies": {
     "@grafana/data": "next",
     "@grafana/ui": "next",
